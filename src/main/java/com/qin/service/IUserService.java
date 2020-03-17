@@ -14,5 +14,8 @@ public interface IUserService {
      * 注册
      * */
     public ServerResponse register(UserInfo userInfo);
-
+    /**
+     * 修改用户信息
+     * */
+    public ServerResponse updateUserInfo(UserInfo userInfo);
 }

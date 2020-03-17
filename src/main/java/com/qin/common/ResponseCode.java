@@ -8,6 +8,8 @@ public enum ResponseCode {
     PARAMETER_NOT_EMPTY(5,"参数不能为空"),
     USERNAME_IS_EXIST(6,"用户名已存在"),
     REGISTER_FAIL(7,"注册失败"),
+    NOT_LOGIN(8,"未登录"),
+    UPDATE_FAIL(9,"修改失败"),
 
 
     PASSWORD_ERROR(4,"密码错误")

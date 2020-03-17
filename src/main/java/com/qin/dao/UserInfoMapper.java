@@ -46,7 +46,7 @@ public interface UserInfoMapper {
      *
      * @mbg.generated
      */
-    int updateByPrimaryKey(UserInfo record);
+    int updateByPrimaryKey(@Param("userInfo") UserInfo userInfo);
 
     /**
      * 判断用户名是否存在

@@ -71,9 +71,23 @@ public class UserService implements IUserService {
         return ServerResponse.createServerResponseBySuccess();
     }
 
+    @Override
+    public ServerResponse updateUserInfo(UserInfo userInfo) {
+
+        int count=userInfoMapper.updateByPrimaryKey(userInfo);
+        if(count==0)
+            return ServerResponse.createServerResponseByFail(ResponseCode.UPDATE_FAIL.getCode(),ResponseCode.UPDATE_FAIL.getMsg());
+
+        //返回更新用户信息
+        UserInfo newUserInfo=userInfoMapper.selectByPrimaryKey(userInfo.getId());
+        UserVO userVO=convert(newUserInfo);
+        return ServerResponse.createServerResponseBySuccess(userVO);
+    }
+
     private UserVO convert(UserInfo userInfo){
         UserVO userVO=new UserVO();
         userVO.setId(userInfo.getId());
+        userVO.setUsername(userInfo.getUsername());
         userVO.setContact(userInfo.getContact());
         userVO.setProfile(userInfo.getProfile());
         userVO.setProfileUrl(userInfo.getProfileUrl());
