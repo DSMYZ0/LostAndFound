@@ -28,6 +28,7 @@ key `laf_category` (`name`) using btree
 #发布表
 create table laf_post(
 `id` int(11) not null auto_increment comment '发布id',
+`LoF` int not null comment '0:失物招领;1:寻物启事',
 `name` varchar (50) not null comment '物品名称',
 `category_id` int(11) default null comment '物品分类',
 `time` datetime not null comment '丢失/拾取时间',

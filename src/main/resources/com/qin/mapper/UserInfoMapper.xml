@@ -41,6 +41,9 @@
     -->
     update laf_user
     set
+    <if test="userInfo.password!=null">
+      password = #{userInfo.password,jdbcType=VARCHAR},
+    </if>
     <if test="userInfo.contact!=null">
       contact = #{userInfo.contact,jdbcType=VARCHAR}
     </if>

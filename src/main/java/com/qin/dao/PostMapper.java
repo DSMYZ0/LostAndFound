@@ -1,6 +1,9 @@
 package com.qin.dao;
 
 import com.qin.pojo.Post;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 public interface PostMapper {
@@ -43,4 +46,11 @@ public interface PostMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Post record);
+
+    /**
+     * 检索发布信息
+     * */
+    List<Post> retrieve(@Param("categoryId")Integer categoryId, @Param("time")Date time, @Param("address") String address,@Param("LoF") Integer LoF,@Param("keyword") String keyword);
+
+
 }

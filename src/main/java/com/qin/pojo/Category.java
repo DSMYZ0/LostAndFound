@@ -1,5 +1,7 @@
 package com.qin.pojo;
 
+import java.util.Objects;
+
 public class Category {
     /**
      *
@@ -164,5 +166,18 @@ public class Category {
      */
     public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return id.equals(category.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

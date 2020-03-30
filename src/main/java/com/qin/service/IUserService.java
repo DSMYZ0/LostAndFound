@@ -2,7 +2,6 @@ package com.qin.service;
 
 import com.qin.common.ServerResponse;
 import com.qin.pojo.UserInfo;
-import org.springframework.stereotype.Component;
 
 public interface IUserService {
 

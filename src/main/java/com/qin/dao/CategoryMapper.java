@@ -1,6 +1,8 @@
 package com.qin.dao;
 
 import com.qin.pojo.Category;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface CategoryMapper {
@@ -43,4 +45,9 @@ public interface CategoryMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Category record);
+
+    /**
+     * 根据id查询一级子类别
+     * */
+    List<Category> findSubCategoryByID(@Param("categoryID")Integer categoryID);
 }

@@ -9,13 +9,14 @@ import com.qin.pojo.vo.UserVO;
 import com.qin.service.IUserService;
 import com.qin.util.MD5Utils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
+    @Resource
     UserInfoMapper userInfoMapper;
 
     @Override
@@ -48,7 +49,7 @@ public class UserService implements IUserService {
 
         String username=userInfo.getUsername();
         String password=userInfo.getPassword();
-        String contact=userInfo.getContact();
+        //String contact=userInfo.getContact();
 
         //用户名非空校验
         if (StringUtils.isBlank(username))

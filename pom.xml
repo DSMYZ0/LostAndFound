@@ -19,8 +19,7 @@
     </parent>
 
     <properties>
-       <java.version>1.8</java.version>
-<!--        <tomcat.version>8.5.39</tomcat.version>-->
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -42,6 +41,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
 
 
@@ -64,8 +67,11 @@
         </dependency>
 
 
-
-
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.13</version>
+        </dependency>
 
         <!--lombok 简化代码-->
         <dependency>

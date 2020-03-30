@@ -10,6 +10,7 @@ public enum ResponseCode {
     REGISTER_FAIL(7,"注册失败"),
     NOT_LOGIN(8,"未登录"),
     UPDATE_FAIL(9,"修改失败"),
+    ILLEGAL_PARAM(10,"非法参数"),
 
 
     PASSWORD_ERROR(4,"密码错误")
