@@ -23,8 +23,10 @@ public class PostService implements IPostService {
     @Resource
     PostMapper postMapper;
 
+
+
     @Override
-    public ServerResponse retrieve(Integer categoryId, Date time, String address,Integer LoF,String keyword,Integer pageNum,Integer pageSize,String orderBy) {
+    public ServerResponse retrieve(Integer categoryId, Date time, String address,Integer LoF,String keyword,Integer userId,Integer pageNum,Integer pageSize,String orderBy) {
 
         PageHelper.startPage(pageNum,pageSize);
         if(StringUtils.isNotBlank(orderBy)){
@@ -35,7 +37,7 @@ public class PostService implements IPostService {
         }
 
 
-        List<Post> postList=postMapper.retrieve(categoryId,time,address,LoF,keyword);
+        List<Post> postList=postMapper.retrieve(categoryId,time,address,LoF,keyword,userId);
         List<PostVO> postVOList=new ArrayList<>();
         for(Post post:postList){
             PostVO postVO=post2PostVO(post);
@@ -46,6 +48,11 @@ public class PostService implements IPostService {
         pageInfo.setList(postVOList);
 
         return ServerResponse.createServerResponseBySuccess(pageInfo);
+    }
+
+    @Override
+    public PostVO selectByPrimaryKey(Integer postID) {
+        return post2PostVO(postMapper.selectByPrimaryKey(postID));
     }
 
 
@@ -60,6 +67,7 @@ public class PostService implements IPostService {
         postVO.setTime(DateUtils.date2String(post.getTime()));
         postVO.setPicture(post.getPicture());
         postVO.setPicture_url(post.getPictureUrl());
+        postVO.setUser_id(post.getUserId());
 
         return postVO;
     }

@@ -19,10 +19,16 @@ public class SpringbootConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
+        List<String> includeUrl=new ArrayList<>();
+        includeUrl.add("/portal/user/**");
+        includeUrl.add("/portal/order/**");
+
         List<String> exclueUrl= new ArrayList<>();
         exclueUrl.add("/portal/user/login");
         exclueUrl.add("/portal/user/register");
 
-        registry.addInterceptor(portalLoginCheckInterceptor).addPathPatterns("/portal/user/**").excludePathPatterns(exclueUrl);
+        registry.addInterceptor(portalLoginCheckInterceptor)
+                .addPathPatterns(includeUrl)
+                .excludePathPatterns(exclueUrl);
     }
 }

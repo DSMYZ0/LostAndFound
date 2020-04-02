@@ -6,13 +6,7 @@ public class Post {
 
     private Integer LoF;
 
-    public Integer getLoF() {
-        return LoF;
-    }
-
-    public void setLoF(Integer loF) {
-        LoF = loF;
-    }
+    private Integer userId;
 
     /**
      *
@@ -276,5 +270,21 @@ public class Post {
      */
     public void setPicture(String picture) {
         this.picture = picture == null ? null : picture.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getLoF() {
+        return LoF;
+    }
+
+    public void setLoF(Integer loF) {
+        LoF = loF;
     }
 }

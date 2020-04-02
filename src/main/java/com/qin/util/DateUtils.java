@@ -12,7 +12,7 @@ import java.util.Date;
  * */
 public class DateUtils {
 
-    public static final String STANDARD="yyyy-MM-dd:HH-mm-ss";
+    public static final String STANDARD="yyyy-MM-dd";
 
     //String2Date
     public static Date string2Date(String strDate){

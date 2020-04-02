@@ -1,10 +1,10 @@
 package com.qin.pojo.vo;
 
-
 public class PostVO {
     private int id;
     private String name;
     private int category_id;
+    private int user_id;
     private String time;
     private String address;
     private String detail;
@@ -82,5 +82,13 @@ public class PostVO {
 
     public void setLoF(int LoF) {
         this.LoF = LoF;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

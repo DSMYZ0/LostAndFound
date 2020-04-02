@@ -11,8 +11,9 @@
     <result column="order_no" jdbcType="BIGINT" property="orderNo" />
     <result column="pay_platform" jdbcType="INTEGER" property="payPlatform" />
     <result column="platform_number" jdbcType="VARCHAR" property="platformNumber" />
-    <result column="platform_status" jdbcType="VARCHAR" property="platformStatus" />
+    <result column="platform_status" jdbcType="INTEGER" property="platformStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="post_id" jdbcType="INTEGER" property="postId"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -29,10 +30,10 @@
     -->
     insert into laf_payinfo (id, user_id, order_no, 
       pay_platform, platform_number, platform_status, 
-      create_time)
+      create_time,post_id)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
       #{payPlatform,jdbcType=INTEGER}, #{platformNumber,jdbcType=VARCHAR}, #{platformStatus,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP},#{postId,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.qin.pojo.PayInfo">
     <!--

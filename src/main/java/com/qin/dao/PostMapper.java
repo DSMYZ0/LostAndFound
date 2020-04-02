@@ -50,7 +50,7 @@ public interface PostMapper {
     /**
      * 检索发布信息
      * */
-    List<Post> retrieve(@Param("categoryId")Integer categoryId, @Param("time")Date time, @Param("address") String address,@Param("LoF") Integer LoF,@Param("keyword") String keyword);
+    List<Post> retrieve(@Param("categoryId")Integer categoryId, @Param("time")Date time, @Param("address") String address,@Param("LoF") Integer LoF,@Param("keyword") String keywordk,@Param("userId")Integer userId);
 
 
 }
