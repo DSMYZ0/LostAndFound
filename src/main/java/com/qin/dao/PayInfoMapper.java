@@ -1,6 +1,8 @@
 package com.qin.dao;
 
 import com.qin.pojo.PayInfo;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface PayInfoMapper {
@@ -43,4 +45,9 @@ public interface PayInfoMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(PayInfo record);
+
+    /**
+     * 根据订单号查询订单信息
+     * */
+    PayInfo findPayInfoByOrderNo(@Param("orderNo") long orderNo);
 }

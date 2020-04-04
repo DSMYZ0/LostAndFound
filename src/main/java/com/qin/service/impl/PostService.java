@@ -51,8 +51,8 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostVO selectByPrimaryKey(Integer postID) {
-        return post2PostVO(postMapper.selectByPrimaryKey(postID));
+    public Post selectByPrimaryKey(Integer postID) {
+        return postMapper.selectByPrimaryKey(postID);
     }
 
 

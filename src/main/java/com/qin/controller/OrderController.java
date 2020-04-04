@@ -3,7 +3,7 @@ package com.qin.controller;
 import com.qin.common.Const;
 import com.qin.common.ResponseCode;
 import com.qin.common.ServerResponse;
-import com.qin.pojo.PayInfo;
+import com.qin.exception.LafException;
 import com.qin.pojo.vo.UserVO;
 import com.qin.service.impl.OrderService;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +21,17 @@ public class OrderController {
     OrderService orderService;
 
     @RequestMapping("create/{postID}")
-    public ServerResponse createOrder(@PathVariable("postID")Integer postID, HttpSession session){
+    public ServerResponse createOrder(@PathVariable("postID") Integer postID, HttpSession session) {
 
-        if(postID!=null)
-            ServerResponse.createServerResponseByFail(ResponseCode.PARAMETER_NOT_EMPTY.getCode(),ResponseCode.PARAMETER_NOT_EMPTY.getMsg());
+        if (postID != null)
+            ServerResponse.createServerResponseByFail(ResponseCode.PARAMETER_NOT_EMPTY.getCode(), ResponseCode.PARAMETER_NOT_EMPTY.getMsg());
 
-        UserVO userVO=(UserVO)session.getAttribute(Const.CURRENT_USER);
+        UserVO userVO = (UserVO) session.getAttribute(Const.CURRENT_USER);
 
-        return orderService.createOrder(postID,userVO.getId());
+        try {
+            return orderService.createOrder(postID, userVO.getId());
+        } catch (LafException e) {
+            return ServerResponse.createServerResponseByFail(-1, e.getMsg());
+        }
     }
 }

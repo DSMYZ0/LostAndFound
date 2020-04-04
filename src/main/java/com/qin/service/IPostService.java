@@ -1,6 +1,7 @@
 package com.qin.service;
 
 import com.qin.common.ServerResponse;
+import com.qin.pojo.Post;
 import com.qin.pojo.vo.PostVO;
 
 import java.util.Date;
@@ -15,5 +16,5 @@ public interface IPostService {
     /**
      * 根据postID查询post信息
      * */
-    public PostVO selectByPrimaryKey(Integer postID);
+    public Post selectByPrimaryKey(Integer postID);
 }

@@ -8,11 +8,13 @@ import com.qin.dao.PayInfoMapper;
 import com.qin.exception.LafException;
 import com.qin.pojo.Carousel;
 import com.qin.pojo.PayInfo;
+import com.qin.pojo.Post;
 import com.qin.pojo.vo.PayInfoVO;
 import com.qin.pojo.vo.PostVO;
 import com.qin.service.IPostService;
 import com.qin.util.DateUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -27,12 +29,13 @@ public class OrderService implements IOrderService {
     @Resource
     CarouselMapper carouselMapper;
 
+    @Transactional(rollbackFor = {LafException.class})
     @Override
     public ServerResponse createOrder(Integer postID,Integer userID) {
 
         //根据postID查询post信息
-        PostVO postVO=postService.selectByPrimaryKey(postID);
-        if(postVO==null)
+        Post post=postService.selectByPrimaryKey(postID);
+        if(post==null)
             throw new LafException("帖子不存在");
 
         //将订单插入数据库
@@ -51,15 +54,18 @@ public class OrderService implements IOrderService {
         //将帖子插入轮播表
         Carousel carousel=new Carousel();
         carousel.setPostId(postID);
-        carousel.setOrder(1);
+//        carousel.setOrder(1);
         carousel.setTime( new Date(System.currentTimeMillis()));
         int countCarousel=carouselMapper.insert(carousel);
         if(countCarousel==0)
             throw new LafException("轮播设置失败");
 
-        PayInfoVO payInfoVO=getPayInfoVO(payInfo);
-        if(payInfoVO==null)
+        //查寻订单
+        PayInfo payInfo1=payInfoMapper.findPayInfoByOrderNo(payInfo.getOrderNo());
+        if(payInfo1==null)
             ServerResponse.createServerResponseByFail(ResponseCode.ORDER_CREATE_FAIL.getCode(),ResponseCode.ORDER_CREATE_FAIL.getMsg());
+
+        PayInfoVO payInfoVO=getPayInfoVO(payInfo1);
 
         return ServerResponse.createServerResponseBySuccess(payInfoVO);
     }
@@ -78,8 +84,9 @@ public class OrderService implements IOrderService {
         payInfoVO.setPlatformNumber(payInfo.getPlatformNumber());
         payInfoVO.setPayPlatform(payInfo.getPayPlatform());
         payInfoVO.setOrderNo(payInfo.getOrderNo());
-        payInfoVO.setCreateTime(DateUtils.date2String(payInfo.getCreateTime()));
+        payInfoVO.setCreateTime(DateUtils.date2String(payInfo.getCreateTime(),"yyyy-MM-dd HH:mm:ss"));
 
         return payInfoVO;
     }
+
 }
