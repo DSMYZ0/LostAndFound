@@ -12,7 +12,7 @@ public class PayInfoVO {
 
     private Integer payPlatform;
 
-    private String platformNumber;
+    private String payedTime;
 
     private Integer platformStatus;
 
@@ -58,12 +58,12 @@ public class PayInfoVO {
         this.payPlatform = payPlatform;
     }
 
-    public String getPlatformNumber() {
-        return platformNumber;
+    public String getPayedTime() {
+        return payedTime;
     }
 
-    public void setPlatformNumber(String platformNumber) {
-        this.platformNumber = platformNumber;
+    public void setPayedTime(String payedTime) {
+        this.payedTime = payedTime;
     }
 
     public Integer getPlatformStatus() {

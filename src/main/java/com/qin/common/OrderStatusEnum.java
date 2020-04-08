@@ -2,7 +2,7 @@ package com.qin.common;
 
 public enum OrderStatusEnum {
     //    0:已取消 10:未付款 20:已付款 30:交易成功 40:交易关闭
-    ORDER_CANCELED(0,"订单已取消"),
+    ORDER_CANCELED(50,"订单已取消"),
     ORDER_NO_PAYED(10,"未付款"),
     ORDER_PAYED(20,"已付款"),
     ORDER_SUCCESS(30,"交易成功"),

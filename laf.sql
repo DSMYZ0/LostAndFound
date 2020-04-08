@@ -66,10 +66,11 @@ create table laf_payinfo
     `user_id`         int(11)      DEFAULT null,
     `post_id`         int(11)  not null,
     `order_no`        bigint(20)   DEFAULT null comment '订单号',
-    `pay_platform`    int(10)      DEFAULT null comment '支付平台 1-支付宝 2-微信',
-    `platform_number` VARCHAR(200) DEFAULT null comment '支付宝支付流水号',
-    `platform_status` int  not null comment '支付状态 0:已取消 10:未付款 20:已付款 30:交易成功 40:交易关闭',
+#     `pay_platform`    int(10)      DEFAULT null comment '支付平台 1-支付宝 2-微信',
+#     `platform_number` VARCHAR(200) DEFAULT null comment '支付宝支付流水号',
+    `platform_status` int  not null comment '支付状态 50:已取消 10:未付款 20:已付款 30:交易成功 40:交易关闭',
     `create_time`     datetime not null comment '创建时间',
+    `payment_time`     datetime not null comment '支付时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

@@ -10,7 +10,7 @@ import com.qin.pojo.Carousel;
 import com.qin.pojo.PayInfo;
 import com.qin.pojo.Post;
 import com.qin.pojo.vo.PayInfoVO;
-import com.qin.pojo.vo.PostVO;
+import com.qin.service.IOrderService;
 import com.qin.service.IPostService;
 import com.qin.util.DateUtils;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,6 @@ public class OrderService implements IOrderService {
     IPostService postService;
     @Resource
     PayInfoMapper payInfoMapper;
-    @Resource
-    CarouselMapper carouselMapper;
 
     @Transactional(rollbackFor = {LafException.class})
     @Override
@@ -43,22 +41,14 @@ public class OrderService implements IOrderService {
         payInfo.setOrderNo(generateOrderNo());
         payInfo.setUserId(userID);
         payInfo.setPostId(postID);
-        payInfo.setCreateTime(new Date(System.currentTimeMillis()));
-//        payInfo.setPayPlatform();
+        payInfo.setCreateTime(new Date());
+        payInfo.setPayPlatform(1);
         payInfo.setPlatformStatus(OrderStatusEnum.ORDER_NO_PAYED.getCode());
 
         int countPayInfo=payInfoMapper.insert(payInfo);
         if(countPayInfo==0)
             return ServerResponse.createServerResponseByFail(ResponseCode.ORDER_CREATE_FAIL.getCode(),ResponseCode.ORDER_CREATE_FAIL.getMsg());
 
-        //将帖子插入轮播表
-        Carousel carousel=new Carousel();
-        carousel.setPostId(postID);
-//        carousel.setOrder(1);
-        carousel.setTime( new Date(System.currentTimeMillis()));
-        int countCarousel=carouselMapper.insert(carousel);
-        if(countCarousel==0)
-            throw new LafException("轮播设置失败");
 
         //查寻订单
         PayInfo payInfo1=payInfoMapper.findPayInfoByOrderNo(payInfo.getOrderNo());
@@ -68,6 +58,15 @@ public class OrderService implements IOrderService {
         PayInfoVO payInfoVO=getPayInfoVO(payInfo1);
 
         return ServerResponse.createServerResponseBySuccess(payInfoVO);
+    }
+
+    @Override
+    public ServerResponse updateOrder(Long orderNo,Integer platformStatus, Date payedTime) {
+
+        if(0==payInfoMapper.updateOrderByPayment(orderNo,platformStatus,payedTime))
+            return ServerResponse.createServerResponseByFail(ResponseCode.ORDER_UPDATE_FAIL.getCode(),ResponseCode.ORDER_UPDATE_FAIL.getMsg());
+
+        return ServerResponse.createServerResponseBySuccess();
     }
 
     //生成订单号(需迭代)
@@ -81,7 +80,7 @@ public class OrderService implements IOrderService {
         payInfoVO.setUserId(payInfo.getUserId());
         payInfoVO.setPostId(payInfo.getPostId());
         payInfoVO.setPlatformStatus(payInfo.getPlatformStatus());
-        payInfoVO.setPlatformNumber(payInfo.getPlatformNumber());
+        payInfoVO.setPayedTime(DateUtils.date2String(payInfo.getPayedTime(),"yyyy-MM-dd HH:mm:ss"));
         payInfoVO.setPayPlatform(payInfo.getPayPlatform());
         payInfoVO.setOrderNo(payInfo.getOrderNo());
         payInfoVO.setCreateTime(DateUtils.date2String(payInfo.getCreateTime(),"yyyy-MM-dd HH:mm:ss"));

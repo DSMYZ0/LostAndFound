@@ -26,6 +26,7 @@ public class SpringbootConfig implements WebMvcConfigurer {
         List<String> exclueUrl= new ArrayList<>();
         exclueUrl.add("/portal/user/login");
         exclueUrl.add("/portal/user/register");
+        exclueUrl.add("/portal/order/callback");
 
         registry.addInterceptor(portalLoginCheckInterceptor)
                 .addPathPatterns(includeUrl)

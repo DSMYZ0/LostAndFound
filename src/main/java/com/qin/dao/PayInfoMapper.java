@@ -3,6 +3,7 @@ package com.qin.dao;
 import com.qin.pojo.PayInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PayInfoMapper {
@@ -50,4 +51,9 @@ public interface PayInfoMapper {
      * 根据订单号查询订单信息
      * */
     PayInfo findPayInfoByOrderNo(@Param("orderNo") long orderNo);
+
+    /**
+     * 根据支付信息更新订单
+     * */
+    int updateOrderByPayment(@Param("orderNo")Long orderNo, @Param("platformStatus")Integer status, @Param("payedTime")Date payedTime);
 }
