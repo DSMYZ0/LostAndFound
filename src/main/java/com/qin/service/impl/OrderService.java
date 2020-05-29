@@ -47,13 +47,13 @@ public class OrderService implements IOrderService {
 
         int countPayInfo=payInfoMapper.insert(payInfo);
         if(countPayInfo==0)
-            return ServerResponse.createServerResponseByFail(ResponseCode.ORDER_CREATE_FAIL.getCode(),ResponseCode.ORDER_CREATE_FAIL.getMsg());
+            return ServerResponse.createServerResponseByFail(ResponseCode.ORDER_CREATE_FAILED.getCode(),ResponseCode.ORDER_CREATE_FAILED.getMsg());
 
 
         //查寻订单
         PayInfo payInfo1=payInfoMapper.findPayInfoByOrderNo(payInfo.getOrderNo());
         if(payInfo1==null)
-            ServerResponse.createServerResponseByFail(ResponseCode.ORDER_CREATE_FAIL.getCode(),ResponseCode.ORDER_CREATE_FAIL.getMsg());
+            ServerResponse.createServerResponseByFail(ResponseCode.ORDER_CREATE_FAILED.getCode(),ResponseCode.ORDER_CREATE_FAILED.getMsg());
 
         PayInfoVO payInfoVO=getPayInfoVO(payInfo1);
 
@@ -64,7 +64,7 @@ public class OrderService implements IOrderService {
     public ServerResponse updateOrder(Long orderNo,Integer platformStatus, Date payedTime) {
 
         if(0==payInfoMapper.updateOrderByPayment(orderNo,platformStatus,payedTime))
-            return ServerResponse.createServerResponseByFail(ResponseCode.ORDER_UPDATE_FAIL.getCode(),ResponseCode.ORDER_UPDATE_FAIL.getMsg());
+            return ServerResponse.createServerResponseByFail(ResponseCode.ORDER_UPDATE_FAILED.getCode(),ResponseCode.ORDER_UPDATE_FAILED.getMsg());
 
         return ServerResponse.createServerResponseBySuccess();
     }

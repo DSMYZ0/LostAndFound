@@ -17,6 +17,8 @@ public class UploadController {
 
     @Value("${laf.host}")
     String imageHost;
+    @Value("${upload.path}")
+    String uploadPath;
 
     @GetMapping("/uploadImage")
     public String upload(){
@@ -28,14 +30,14 @@ public class UploadController {
     @ResponseBody
     public String upload(@RequestParam("profile") MultipartFile file){
 
-        if(file!=null&&file.getOriginalFilename()!=null){
+        if(file!=null&&file.getOriginalFilename()!=null){       
             String originalFilename=file.getOriginalFilename();
             //获取文件扩展名
             String extendName=originalFilename.substring(originalFilename.lastIndexOf("."));
             //生成唯一文件名
             String uniqueName= UUID.randomUUID().toString();
-            //存储(T:/upload/)
-            File newFile=new File("I:"+File.separator+"upload",uniqueName+extendName);
+            //存储
+            File newFile=new File(uploadPath,uniqueName+extendName);
             try {
                 file.transferTo(newFile);
                 //返回图片url

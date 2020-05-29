@@ -22,11 +22,14 @@ public class SpringbootConfig implements WebMvcConfigurer {
         List<String> includeUrl=new ArrayList<>();
         includeUrl.add("/portal/user/**");
         includeUrl.add("/portal/order/**");
+        includeUrl.add("/portal/post/**");
 
         List<String> exclueUrl= new ArrayList<>();
         exclueUrl.add("/portal/user/login");
         exclueUrl.add("/portal/user/register");
         exclueUrl.add("/portal/order/callback");
+        exclueUrl.add("/portal/post/retrieve");
+        exclueUrl.add("/portal/post/carousel");
 
         registry.addInterceptor(portalLoginCheckInterceptor)
                 .addPathPatterns(includeUrl)

@@ -17,4 +17,24 @@ public interface IPostService {
      * 根据postID查询post信息
      * */
     public Post selectByPrimaryKey(Integer postID);
+
+    /**
+     * 获取轮播图
+     * */
+    ServerResponse getCarousel();
+
+    /**
+     * 发布信息
+     * */
+    ServerResponse addPost(Post post);
+
+    /**
+     * 修改发布信息
+     * */
+    ServerResponse updatePost(Post post);
+
+    /**
+     * 删除发布信息
+     * */
+    ServerResponse deletePost(Integer id);
 }

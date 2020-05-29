@@ -21,7 +21,6 @@ create table laf_category
 (
     `id`         int(11) not null auto_increment comment '类别id',
     `parent_id`  int(11)     default null comment '父类id,parent_id=0时为根节点,一级类别',
-    `user_id`    int(11) not null comment '用户ID',
     `name`       varchar(50) default null comment '类别名称',
     `status`     tinyint(1)  default '1' comment '类别状态,1:正常,2:弃用',
     `sort_order` int(4)      default null comment '排序编号,同类展示顺序,数值相等自然展开',
@@ -34,7 +33,8 @@ create table laf_category
 create table laf_post
 (
     `id`          int(11)     not null auto_increment comment '发布id',
-    `LoF`         int         not null comment '0:失物招领;1:寻物启事',
+    `user_id`    int(11) not null comment '用户ID',
+    `LoF`         int         not null comment '0:寻物启事;1:失物招领',
     `name`        varchar(50) not null comment '物品名称',
     `category_id` int(11)      default null comment '物品分类',
     `time`        datetime    not null comment '丢失/拾取时间',
@@ -63,7 +63,7 @@ create table laf_carousel
 create table laf_payinfo
 (
     `id`              int(11)  not null auto_increment,
-    `user_id`         int(11)      DEFAULT null,
+    `user_id`         int(11)      not null,
     `post_id`         int(11)  not null,
     `order_no`        bigint(20)   DEFAULT null comment '订单号',
 #     `pay_platform`    int(10)      DEFAULT null comment '支付平台 1-支付宝 2-微信',

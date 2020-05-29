@@ -67,7 +67,7 @@ public class UserService implements IUserService {
         //注册
         Integer result=userInfoMapper.insert(userInfo);
         if(result==0)   //注册失败
-            return ServerResponse.createServerResponseByFail(ResponseCode.REGISTER_FAIL.getCode(),ResponseCode.REGISTER_FAIL.getMsg());
+            return ServerResponse.createServerResponseByFail(ResponseCode.REGISTER_FAILED.getCode(),ResponseCode.REGISTER_FAILED.getMsg());
 
         return ServerResponse.createServerResponseBySuccess();
     }
@@ -77,7 +77,7 @@ public class UserService implements IUserService {
 
         int count=userInfoMapper.updateByPrimaryKey(userInfo);
         if(count==0)
-            return ServerResponse.createServerResponseByFail(ResponseCode.UPDATE_FAIL.getCode(),ResponseCode.UPDATE_FAIL.getMsg());
+            return ServerResponse.createServerResponseByFail(ResponseCode.UPDATE_FAILED.getCode(),ResponseCode.UPDATE_FAILED.getMsg());
 
         //返回更新用户信息
         UserInfo newUserInfo=userInfoMapper.selectByPrimaryKey(userInfo.getId());
